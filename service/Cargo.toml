@@ -1,0 +1,39 @@
+[package]
+name = "zk-prover-service"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+ark-bn254 = { workspace = true }
+ark-groth16 = { workspace = true }
+ark-serialize = { workspace = true }
+clap = { workspace = true }
+directories = { workspace = true }
+futures = { workspace = true }
+ibc-core-commitment-types = { workspace = true }
+ibc-proto = { workspace = true }
+p3-baby-bear = { workspace = true }
+parking_lot = { workspace = true }
+prost = { workspace = true }
+serde = { workspace = true }
+serde_cbor = { workspace = true }
+serde_json = { workspace = true }
+sp1-core-executor = { workspace = true }
+sp1-prover = { workspace = true }
+sp1-recursion-core = { workspace = true }
+sp1-sdk = { workspace = true }
+sp1-stark = { workspace = true }
+sp1-verifier = { workspace = true, features = ["ark"] }
+strum = { workspace = true }
+tendermint = { workspace = true }
+tendermint-light-client-verifier = { workspace = true }
+tendermint-rpc = { workspace = true, features = ["http-client"] }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+zk-light-client-core = { workspace = true }
+zk-light-client-programs = { workspace = true }
+jsonrpsee = { workspace = true, features = ["server", "http-client", "macros"] }
