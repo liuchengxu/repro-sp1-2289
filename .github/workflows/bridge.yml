@@ -1,0 +1,83 @@
+name: Bridge
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fmt:
+    name: rustfmt
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: nightly
+          components: rustfmt
+
+      - name: Run fmt
+        run: cargo +nightly fmt --all -- --check
+
+  # clippy:
+    # name: clippy
+    # runs-on: ubuntu-24.04
+    # steps:
+      # - uses: actions/checkout@v4
+
+      # - name: Cache Cargo
+        # uses: actions/cache@v4
+        # with:
+          # path: |
+            # ~/.cargo/registry
+            # ~/.cargo/git
+            # target
+          # key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      # - name: Run clippy
+        # run: |
+          # curl -L https://sp1up.succinct.xyz | bash
+          # ~/.sp1/bin/sp1up
+          # # sp1 does not work with clippy, ignore all program related crates (`prover/programs/*`) in clippy check.
+          # cargo clippy --locked --workspace --all-features --all-targets \
+            # --manifest-path Cargo.toml \
+            # --exclude btc_aggregation_program \
+            # --exclude btc_aggregation_program_script \
+            # --exclude btc_consensus_program \
+            # --exclude btc_consensus_program_script \
+            # --exclude btc_inclusion_program \
+            # --exclude btc_inclusion_program_script \
+            # --exclude zk-light-client-programs \
+            # -- -D warnings
+
+  build:
+    name: build
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Cache Cargo
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Build
+      run: |
+        curl -L https://sp1up.succinct.xyz | bash
+        ~/.sp1/bin/sp1up
+        cargo build

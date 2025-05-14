@@ -1,0 +1,16 @@
+[package]
+name = "zk-light-client-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+bincode = { workspace = true }
+crypto-bigint = { workspace = true }
+ibc-core-commitment-types = { workspace = true, default-features = false }
+ibc-core-host-types = { workspace = true, default-features = false }
+ibc-proto = { workspace = true, default-features = false }
+serde = { workspace = true }
+sha2 = { workspace = true }
+sp1-derive = { workspace = true }
+tendermint-light-client-verifier = { workspace = true, default-features = false, features = ["rust-crypto"] }

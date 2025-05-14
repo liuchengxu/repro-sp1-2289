@@ -1,0 +1,12 @@
+[package]
+name = "zk-light-client-programs"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+bitcoin = { workspace = true }
+baby_aggregation_program_script = { path = "../programs/baby_aggregation_program_script" }
+baby_consensus_program_script = { path = "../programs/baby_consensus_program_script" }
+baby_membership_program_script = { path = "../programs/baby_membership_program_script" }
+zk-light-client-core = { workspace = true }

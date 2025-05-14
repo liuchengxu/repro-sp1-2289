@@ -1,0 +1,11 @@
+[package]
+name = "baby_aggregation_program_script"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+sp1-sdk = { workspace = true }
+
+[build-dependencies]
+sp1-build = { workspace = true }

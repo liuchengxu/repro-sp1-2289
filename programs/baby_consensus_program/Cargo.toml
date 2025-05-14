@@ -1,0 +1,13 @@
+[package]
+name = "baby_consensus_program"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+sp1-zkvm = { workspace = true, features = ["verify"] }
+tendermint-light-client-verifier = { workspace = true, default-features = false, features = [
+    "rust-crypto",
+] }
+serde_cbor = { workspace = true }
+zk-light-client-core = { workspace = true }
